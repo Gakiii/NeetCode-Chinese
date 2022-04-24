@@ -29,3 +29,23 @@ class Solution:
                 res += rightMax - height[r]
         return res
 ```
+
+## 3. 滑动窗口
+### 3.1 最佳买卖股票时机
+1. 当 右边的值大于左边的值的时候 才有利润 才进行操作
+2. 当 右边的值小于左边的值的时候 新的最小值出现了 进行更新
+3. 每次都要将右边的指针移动
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        l, r = 0 , 1
+        max_profit = 0
+        while r < len(prices):
+            if prices[l] < prices[r]:
+                profit = prices[r] - prices[l]
+                max_profit = max(max_profit, profit)
+            else:
+                l = r
+            r += 1
+        return max_profit
+```
