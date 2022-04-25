@@ -49,3 +49,22 @@ class Solution:
             r += 1
         return max_profit
 ```
+### 3.2 最大的无重复子串
+
+滑动窗口的题，右指针往右滑动，当发现有重复的元素的时候，持续移动左边的指针，
+直到没有重复元素为止，每次添加新的元素之后，更新结果的大小。
+```python
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        char_set = set()
+        l, r = 0, 0
+        res = 0
+        while r < len(s):
+            while s[r] in char_set:
+                char_set.remove(s[l])
+                l += 1
+            char_set.add(s[r])
+            r += 1
+            res = max(res, len(char_set))
+        return res
+```
