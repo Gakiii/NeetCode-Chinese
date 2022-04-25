@@ -1,4 +1,19 @@
 # NeetCode with Chinese
+## 1. 数组 && Hash
+### 1.1  217 存在重复元素
+直接定义一个set，遍历一遍，无则添加，有则返回正确
+遍历完之后没有返回错误
+```python
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        exists = set()
+        for i in nums:
+            if i not in exists:
+                exists.add(i)
+            else:
+                return True
+        return False
+```
 
 ## 2. 双指针
 
