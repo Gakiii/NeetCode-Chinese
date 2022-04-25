@@ -15,6 +15,21 @@ class Solution:
         return False
 ```
 
+### 1.2 242 有效的异位词
+创建两个字典，添加元素之后返回字典
+(python3)中字典已经有序
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        set_s = {}
+        set_t = {}
+        for i in s:
+            set_s[i] = set_s.get(i, 0) + 1
+        for i in t:
+            set_t[i] = set_t.get(i, 0) + 1
+        return set_s == set_t
+```
+
 ## 2. 双指针
 
 ### 2.5 接雨水
