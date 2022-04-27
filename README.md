@@ -98,3 +98,24 @@ class Solution:
             res = max(res, len(char_set))
         return res
 ```
+### 3.3 424. 替换后的最长重复字符
+1. 和最大无无重复字串很像，最大无重复字串的判断条件是是否存在有重复，而此题的判断的条件是
+经过k次替换之后是否符合条件。
+2. 记录出现次数最多的字母频次为 maxf, 那么 窗口值 (r - l + 1) - maxf  <= k 就是符合条件的
+3. 当右指针滑动之后，更新count里面的值，计算 maxf 的值 然后更新窗口值，直到满足条件，满足条件之后更新结果的值
+
+```python
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        count = {}
+        l = 0
+        res = 0
+        for r in range(len(s)):
+            count[s[r]] = 1 + count.get(s[r], 0)
+            maxf = max(count.values())
+            while (r - l + 1) - maxf > k:
+                count[s[l]] -= 1
+                l += 1
+            res = max(res, r - l + 1)
+        return res
+```
