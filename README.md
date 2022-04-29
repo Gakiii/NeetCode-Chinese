@@ -119,3 +119,35 @@ class Solution:
             res = max(res, r - l + 1)
         return res
 ```
+
+### 3.4 567字符串的排列
+首先要保证两个滑动串口的大小一致，二者同步滑动
+dict1 = {a:0, b:1} 和 dict2 = {b:1}是不一样的，所以用数组来模拟其实可能会更简单
+左右指针同时右移一格，保证滑动窗口不变
+右指针移动之后 更新 s2list (+)
+左指针移动之后 更新 s1list (-)
+每次都判断 s1list == s2list
+```python
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s1) > len(s2):
+            return False
+        l = 0
+        r = len(s1)
+        s1_list = [0] * 26
+        s2_list = [0] * 26
+        for i in range(len(s1)):
+            s1_list[ord(s1[i])- ord('a')] += 1
+            s2_list[ord(s2[i]) - ord('a')] += 1
+        if s1_list == s2_list:
+            return True
+        for r in range(r, len(s2)):
+            if s1_list == s2_list:
+                return True
+            s2_list[ord(s2[r]) - ord('a')] += 1
+            s2_list[ord(s2[l]) - ord('a')] -= 1
+            l += 1
+        if s1_list == s2_list:
+            return True
+        return False
+```
